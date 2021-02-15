@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import Container from "../components/Container/index";
 import SearchForm from "../components/SearchForm/index";
 import SearchResults from "../components/SearchResult/index";
-import Navbar from "../components/Navbar/index";
+import API from "../utils/Api";
 
-class Search extends Component {
+//search api for google books
+
+class searchFormpage extends Component {
   state = {
     search: "",
     book: [],
@@ -15,7 +17,7 @@ class Search extends Component {
   // When the component mounts, get a list a possible titltes  and update this.state.results
 
   componentDidMount() {
-    API.getbookList()
+    API.getBooks()
       .then((res) =>
         this.setState({
           books: res.data.results,
@@ -44,9 +46,8 @@ class Search extends Component {
     return (
       <div>
         <Container style={{ miniHeight: "80%" }}>
-          <Navbar />
           <h1 className="text-center">Search By title!</h1>
-          <Alert
+          <alert
             type="danger"
             style={{
               opacity: this.state.error ? 1 : 0,
@@ -54,7 +55,7 @@ class Search extends Component {
             }}
           >
             {this.state.error}
-          </Alert>
+          </alert>
           <SearchForm
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
@@ -67,4 +68,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default searchFormpage;

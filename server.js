@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
-const PORT = process.env.PORT || 3000;
 const app = express();
 const db = require("./models");
+const axios = require("axios");
+
+const PORT = process.env.PORT || 3000;
 
 // app.use(logger("dev"));
 
@@ -25,6 +27,19 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
+
+// require axios here, and res.json with axios
+
+app.get("/api/search", (req, res) => {
+  axios
+    .get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.query)
+    .then(({ data: { googlebooks } }) => res.json(googlebooks))
+    .catch((err) => res.json(err));
+});
+
+// req.params s
+// res.status(422).json(err));
+// actions are happening here
 
 // You need a post route for api/googlebooks - should return all saved books as JSON
 app.get("/api/googlebooks", (req, res) => {

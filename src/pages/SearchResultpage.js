@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import SearchForm from "../components/SearchForm/index";
-import SearchResults from "../components/SearchResult/index";
-import Navbar from "../components/SearchResult/index";
+import SearchResult from "../components/SearchResult/index";
+import API from "../utils/Api";
 
-class SearchResults extends Component {
+// calling from the data
+class SearchResultpage extends Component {
   state = {
     search: "",
     results: [],
@@ -11,7 +12,7 @@ class SearchResults extends Component {
 
   // When this component mounts, search the book
   componentDidMount() {
-    this.searchBooks("title");
+    this.search(this.props.search);
   }
 
   search = (query) => {
@@ -24,10 +25,9 @@ class SearchResults extends Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      [title]: value,
+      [name]: value,
     });
   };
-
   // When the form is submitted, search the book for `this.state.search`
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -37,7 +37,6 @@ class SearchResults extends Component {
   render() {
     return (
       <div>
-        <Navbar />
         <SearchForm
           search={this.state.search}
           handleFormSubmit={this.handleFormSubmit}
@@ -49,4 +48,4 @@ class SearchResults extends Component {
   }
 }
 
-export default SearchResults;
+export default SearchResultpage;
