@@ -12,8 +12,8 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={SearchResultpage} />
-          <Route exact path="/searchResult" component={SearchResultpage} />
-          <Route exact path="/SearchForm" component={SearchFormpage} />
+          <Route exact path="/searchResultpage" component={SearchResultpage} />
+          <Route exact path="/SearchFormpage" component={SearchFormpage} />
         </Switch>
       </div>
     </Router>

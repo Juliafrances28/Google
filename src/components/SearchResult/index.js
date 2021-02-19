@@ -1,14 +1,14 @@
 import React from "react";
 
-function SearchResult(props) {
+function ResultList() {
   return (
     <ul className="list-group">
-      {props.results.map((result) => (
+      {this.setState.result.map((result) => (
         <li className="list-group-item" key={result.id}>
           <img
             alt={result.title}
             className="img-fluid"
-            src={this.state.results}
+            src={result.images.original.url}
           />
         </li>
       ))}
@@ -16,4 +16,4 @@ function SearchResult(props) {
   );
 }
 
-export default SearchResult;
+export default ResultList;

@@ -6,29 +6,20 @@ import "./style.css";
 function SearchForm(props) {
   console.log(props);
   return (
-    <form className="search">
+    <form>
       <div className="form-group">
-        <label htmlFor="book">Book Title:</label>
+        <label htmlFor="book">Book</label>
         <input
-          value={props.search}
           onChange={props.handleInputChange}
-          name="book"
-          list="books"
+          value={props.search}
+          name="search"
           type="text"
           className="form-control"
-          placeholder="Type in a book to begin"
-          id="book"
+          placeholder="Search for a Book"
+          id="search"
         />
-        {
-          // <datalist id="books">
-          //   {props.books.map((book) => (
-          //     <option value={book} key={book} />
-          //   ))}
-          // </datalist>
-        }
-
         <button
-          type="submit"
+          // type="submit"
           onClick={props.handleFormSubmit}
           className="btn btn-success"
         >

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import SearchForm from "../components/SearchForm/index";
-import SearchResult from "../components/SearchResult/index";
+import Result from "../components/SearchResult/index";
 import API from "../utils/Api";
 
-// calling from the data
+//calling from the data
 class SearchResultpage extends Component {
   state = {
     search: "",
@@ -11,27 +11,40 @@ class SearchResultpage extends Component {
   };
 
   // When this component mounts, search the book
+  // this is lifecycle method is like the render.
+  // this is where you excute your ajax calls
   componentDidMount() {
-    this.search(this.props.search);
+    this.search(this.state.search);
+    console.log(this.state.search);
   }
 
-  search = (query) => {
-    API.search(query)
-      .then((res) => this.setState({ results: res.data.data }))
-      .catch((err) => console.log(err));
+  search = () => {
+    API.search(this.state.search).then((res) =>
+      this.setState({ result: this.state.result })
+    );
+    console.log(result).catch((err) => console.log(err));
   };
 
+  // need something to be returned at after results on line 32?
+  // results is the problem?  (mad face emoji)
+  // what is comming back here in the above function?
+
   handleInputChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    // getting the value and name of the input which triggered the change
+    // name and value are taking off the target using destructing
+    const { name, value } = event.target;
+    // updating the input's state
     this.setState({
+      // something here
       [name]: value,
     });
+    // set and get results into the array
   };
-  // When the form is submitted, search the book for `this.state.search`
+  // When the form is submitted, search for the book using `this.state.search`
   handleFormSubmit = (event) => {
     event.preventDefault();
-    this.searchBooks(this.state.search);
+    console.log(this.state.search); // this works
+    this.search(this.state.search);
   };
 
   render() {
@@ -42,10 +55,9 @@ class SearchResultpage extends Component {
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        <SearchResult results={this.state.results} />
+        <Result results={this.state.results} />
       </div>
     );
   }
 }
-
 export default SearchResultpage;

@@ -4,6 +4,7 @@ const path = require("path");
 const app = express();
 const db = require("./models");
 const axios = require("axios");
+const { GoogleBook } = require("./models");
 
 const PORT = process.env.PORT || 3000;
 
@@ -45,6 +46,7 @@ app.get("/api/search", (req, res) => {
 app.get("/api/googlebooks", (req, res) => {
   db.GoogleBook.find({})
     .then((dbGoogleBook) => {
+      console.log(dbGoogleBook);
       res.json(dbGoogleBook);
     })
     .catch((err) => {
