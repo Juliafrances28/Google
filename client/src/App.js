@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SearchFormpage from "./pages/SearchFormpage";
 import SearchResultpage from "./pages/SearchResultpage";
 import Navbar from "./components/Navbar/index";
+
 import "./App.css";
 
 function App() {

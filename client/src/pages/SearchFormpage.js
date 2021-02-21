@@ -3,7 +3,7 @@ import Container from "../components/Container/index";
 import SearchForm from "../components/SearchForm/index";
 import SearchResults from "../components/SearchResult/index";
 import CardContainer from "../components/CardContainer/index";
-import API from "../utils/Api";
+import API from "../utils/API";
 
 //search api for google books
 
@@ -21,7 +21,7 @@ class searchFormpage extends Component {
     API.getBooks()
       .then((res) =>
         this.setState({
-          books: res.data.results,
+          books: res.data.results, // set results
         })
       )
       .catch((err) => console.log(err));
@@ -29,7 +29,7 @@ class searchFormpage extends Component {
 
   // This is the item in question can be seen in console.log. see search form component in this page
   handleInputChange = (event) => {
-    console.log(event.target.value); // this works
+    console.log(event.target.value); // I am able to console.log this line of code.
     this.setState({ search: event.target.value });
   };
 
