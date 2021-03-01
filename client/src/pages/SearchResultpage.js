@@ -8,23 +8,23 @@ import API from "../utils/API";
 class SearchResultpage extends Component {
   state = {
     search: "",
-    results: {},
+    results: { items: [] },
   };
 
   // When this component mounts, search the book
   // This is a lifecycle method which is like the render.
   // This is where you excute your ajax calls
-  componentDidMount() {
-    this.search(this.state.search);
-    console.log(this.state.search);
-  }
+  // componentDidMount() {
+  //   this.search(this.state.search);
+  //   console.log(this.state.search);
+  // }
 
   // In the fuction below, the code is searching with the use of the api. I have api's in the api.js file in the utils folder.
   // I also have some api calls in my server.js, specifically on the backend. In this file I was able to test them on postman and they work.
   search = () => {
     API.search(this.state.search)
       .then((res) => {
-        this.setState({ results: res.data });
+        this.setState({ results: res.data || { items: [] } });
         console.log(this.state.results);
         // this.setState({ results: res.data.posts });
         console.log(res);
@@ -53,7 +53,7 @@ class SearchResultpage extends Component {
   };
 
   render() {
-    console.log(this.state.search);
+    console.log(this.state);
     return (
       <div>
         <SearchForm
@@ -61,8 +61,9 @@ class SearchResultpage extends Component {
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        {this.state.results.length ? (
-          <Result results={this.state.results}></Result>
+
+        {this.state.results && this.state.results.items.length ? (
+          <Result results={this.state.results.items}></Result>
         ) : null}
       </div>
     );
