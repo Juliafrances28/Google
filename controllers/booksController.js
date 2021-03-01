@@ -1,36 +1,32 @@
 const db = require("../models");
 
 // Defining methods for the booksController
+// returning null instead of actual data
 
 module.exports = {
   findAll: function (req, res) {
-    db.googlebooks
-      .find(req.query)
+    db.GoogleBook.find(req.query)
       .sort({ date: -1 })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   findById: function (req, res) {
-    db.googlebooks
-      .findById(req.params.id)
+    db.GoogleBook.findById(req.params.id)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
-    db.googlebooks
-      .create(req.body)
+    db.GoogleBook.create(req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   update: function (req, res) {
-    db.googlebooks
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+    db.GoogleBook.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   remove: function (req, res) {
-    db.googlebooks
-      .findById({ _id: req.params.id })
+    db.GoogleBook.findById({ _id: req.params.id })
       .then((dbModel) => dbModel.remove())
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));

@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import SearchFormpage from "./pages/SearchFormpage";
-import SearchResultpage from "./pages/SearchResultpage";
+import Search from "./pages/Search";
+import Saved from "./pages/Saved";
 import Navbar from "./components/Navbar/index";
-// import Books from "./pages/Books";
 
 import "./App.css";
 
@@ -13,10 +12,8 @@ function App() {
       <div>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={SearchResultpage} />
-          {/* <Route exact path="/" component={Books} /> */}
-          <Route exact path="/searchResultpage" component={SearchResultpage} />
-          <Route exact path="/SearchFormpage" component={SearchFormpage} />
+          <Route exact path="/Search" component={Search} />
+          <Route exact path="/Saved" component={Saved} />
         </Switch>
       </div>
     </Router>

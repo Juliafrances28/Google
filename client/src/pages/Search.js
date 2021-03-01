@@ -5,7 +5,7 @@ import API from "../utils/API";
 
 // Note :I Know the problem is that "results is undefined" I am just struggling to figure out how to define results.
 
-class SearchResultpage extends Component {
+class searchpage extends Component {
   state = {
     search: "",
     results: { items: [] },
@@ -19,7 +19,7 @@ class SearchResultpage extends Component {
   //   console.log(this.state.search);
   // }
 
-  // In the fuction below, the code is searching with the use of the api. I have api's in the api.js file in the utils folder.
+  // In the function below, the code is searching with the use of the api. I have api's in the api.js file in the utils folder.
   // I also have some api calls in my server.js, specifically on the backend. In this file I was able to test them on postman and they work.
   search = () => {
     API.search(this.state.search)
@@ -69,4 +69,4 @@ class SearchResultpage extends Component {
     );
   }
 }
-export default SearchResultpage;
+export default searchpage;

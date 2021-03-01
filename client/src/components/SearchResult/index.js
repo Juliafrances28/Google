@@ -9,12 +9,16 @@ function SearchResults(props) {
           <img alt="Books" src={result.volumeInfo.imageLinks.thumbnail} />
         ) : null;
 
+        const authors = result.volumeInfo.authors
+          ? result.volumeInfo.authors.join(",")
+          : "";
+
         return (
           <li key={result.id} className="list-group-item">
             {img}
 
-            <h1> {result.title} </h1>
-            <h1> {result.volumeInfo.author} </h1>
+            <h1> {result.volumeInfo.title} </h1>
+            <h1> {authors} </h1>
             <p> {result.volumeInfo.description} </p>
             <a href={result.volumeInfo.Link}> </a>
           </li>

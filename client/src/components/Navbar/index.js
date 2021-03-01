@@ -11,7 +11,7 @@ function Navbar() {
         <ul className="navbar">
           <li className="nav">
             <Link
-              to="/SearchFormpage"
+              to="/Search"
               className={
                 window.location.pathname === "/SearchFormpage"
                   ? "nav-link active"
@@ -24,14 +24,14 @@ function Navbar() {
 
           <li className="nav">
             <Link
-              to="/SearchResultpage"
+              to="/Saved"
               className={
                 window.location.pathname === "SearchResultpage"
                   ? "nav-link active"
                   : "nav-link"
               }
             >
-              Results
+              Saved
             </Link>
           </li>
         </ul>
