@@ -1,19 +1,25 @@
 import React from "react";
 
-function ResultList(props) {
+function SearchResults(props) {
+  console.log(props);
   return (
-    <ul className="list-group">
-      {/* {props.results.map((result) => (
-        <li className="list-group-item" key={result.id}>
+    <ul className="list-group search-results">
+      {props.results.map((result) => (
+        <li key={result.id} className="list-group-item">
           <img
-            alt={result.title}
+            alt="Books"
+            src={result.volumeInfo.imageLinks.thumbnail}
             className="img-fluid"
-            src={result.images.original.url} */}
-      {/* />
-        </li> */}
-      {/* ))} */}
+          />
+
+          <h1> {result.title} </h1>
+          <h1> {result.volumeInfo.author} </h1>
+          <p> {result.volumeInfo.description} </p>
+          <a href={result.volumeInfo.Link}> </a>
+        </li>
+      ))}
     </ul>
   );
 }
 
-export default ResultList;
+export default SearchResults;

@@ -1,26 +1,15 @@
 const express = require("express");
+
 const mongoose = require("mongoose");
-const path = require("path");
-const app = express();
-const db = require("./models");
-const axios = require("axios");
-const { GoogleBook } = require("./models");
+const routes = require("./routes");
 
 const PORT = process.env.PORT || 3001;
-
-// app.use(logger("dev"));
+const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static("public"));
-
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
+// app.use(express.static("public"));
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -28,56 +17,21 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
-app.get("/api/search", (req, res) => {
-  axios
-    .get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.query)
-    .then(({ data: { googlebooks } }) => res.json(googlebooks))
-    .catch((err) => res.json(err));
+app.use(routes);
+
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
 });
 
-// You need a post route for api/googlebooks - should return all saved books as JSON
-app.get("/api/googlebooks", (req, res) => {
-  db.GoogleBook.find({})
-    .then((dbGoogleBook) => {
-      console.log(dbGoogleBook);
-      res.json(dbGoogleBook);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-});
-
-// You need a get route for api/googlebooks - which will be used to save a new book to the database
-app.post("/api/googlebooks", (req, res) => {
-  db.GoogleBook.create(req.body)
-    .then((dbGoogleBook) => {
-      res.json(dbGoogleBook);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-});
-
-// `/api/books/:id` (delete) - Will be used to delete a book from the database by Mongo `_id`
-app.delete("/api/googlebooks/:id", (req, res) => {
-  const gBookID = req.params.id;
-  GoogleBook.deleteOne({ _id: req.params.id }, function (err) {
-    if (err) {
-      res.status(404).end();
-    } else {
-      res.status(200).end();
-    }
-    // deleted at most one tank document
-  });
-});
-
-// res.send("DELETE the book");
-// Send every other request to the React app
-// Define any API routes before this runs
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+// Start the API server
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });

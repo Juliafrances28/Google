@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./style.css";
 
 // Using the datalist element we can create autofill suggestions based on the props.books array
