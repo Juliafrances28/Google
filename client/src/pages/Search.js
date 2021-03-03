@@ -13,7 +13,7 @@ class searchpage extends Component {
 
   // When this component mounts, search the book
   // This is a lifecycle method which is like the render.
-  // This is where you excute your ajax calls
+  // // This is where you excute your ajax calls
   // componentDidMount() {
   //   this.search(this.state.search);
   //   console.log(this.state.search);
@@ -52,6 +52,33 @@ class searchpage extends Component {
     this.search(this.state.search);
   };
 
+  handleSaveButton = (id) => {
+    const foundBook = this.state.results.items.find(
+      (result) => result.id === id
+    );
+    console.log(foundBook);
+
+    //   //   title: { type: String },
+    // authors: [{ type: Array }],
+    // description: String,
+    // image: String,
+    // link: String,
+
+    const bookObject = {
+      title: foundBook.volumeInfo.title,
+      authors: foundBook.volumeInfo.authors,
+      description: foundBook.volumeInfo.description,
+      image: foundBook.volumeInfo.imageLinks.thumbnail,
+      link: foundBook.volumeInfo.infoLink,
+    };
+
+    console.log(bookObject);
+
+    API.saveBook(bookObject).then(() => {
+      console.log("success");
+    });
+  };
+
   render() {
     console.log(this.state);
     return (
@@ -63,7 +90,10 @@ class searchpage extends Component {
         />
 
         {this.state.results && this.state.results.items.length ? (
-          <Result results={this.state.results.items}></Result>
+          <Result
+            results={this.state.results.items}
+            handleSaveButton={this.handleSaveButton}
+          ></Result>
         ) : null}
       </div>
     );

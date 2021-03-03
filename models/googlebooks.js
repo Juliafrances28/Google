@@ -17,9 +17,8 @@ const Schema = mongoose.Schema;
 // });
 
 const googlebooksSchema = new Schema({
-  _id: { type: String },
   title: { type: String },
-  authors: [{ type: Array }],
+  authors: { type: [String] },
   description: String,
   image: String,
   link: String,
