@@ -53,12 +53,18 @@ class savepage extends Component {
       // </div>
 
       <Container>
-        <Container>
-          <Result
-            savedBooks={this.state.savedBooks}
-            handleDeleteButton={this.handleDeleteButton}
-          ></Result>
-        </Container>
+        {this.state.results.length &&
+          this.state.results.map((result) => {
+            return (
+              <li key={result._id} className="list-group-item">
+                <img src={result.image} alt={result.title} />
+                <h1> {result.title} </h1>
+                <h1> {result.authors.join(", ")} </h1>
+                <p> {result.description} </p>
+                <a href={result.link}> Link</a>
+              </li>
+            );
+          })}
       </Container>
     );
   }
